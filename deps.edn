@@ -1,0 +1,24 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}
+        net.mikera/core.matrix {:mvn/version "0.62.0"}
+        the-flood/the-flood {:mvn/version "0.1.1"}
+        cli-matic {:git/url "https://github.com/l3nz/cli-matic.git"
+                   :sha "374b2ad71843c07b9d2ddfc1d4439bd7f8ebafab"}}
+ :aliases
+ {:run-m {:main-opts ["-m" "onthemarket.clj-paint"]}
+  :run-x {:ns-default onthemarket.clj-paint
+          :exec-fn -main
+          :exec-args {:name "Clojure"}}
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}}}
+  :runner
+  {:extra-deps {io.github.cognitect-labs/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "2d69f33d7980c3353b246c28f72ffeafbd9f2fab"}}
+   :exec-fn cognitect.test-runner.api/test}
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
+            :exec-fn hf.depstar/uberjar
+            :exec-args {:aot true
+                        :jar "clj-paint.jar"
+                        :main-class "onthemarket.clj-paint"
+                        :sync-pom true}}}}
